@@ -21,7 +21,7 @@ function App() {
 			<div>
 				<h2>College Scorecard API</h2>
 				<Searchbar searchByState={handleSearchByState} />
-				<Dashboard collegeData={collegeData} greeting={'hi'} error={error} />
+				<Dashboard collegeData={collegeData} error={error} />
 			</div>
 		</div>
 	);
