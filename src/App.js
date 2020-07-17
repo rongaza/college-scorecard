@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Searchbar from './components/Searchbar';
 import Dashboard from './components/Dashboard';
 import { fetchData } from './Api/api';
@@ -7,9 +7,12 @@ function App() {
 	const [error, setError] = useState(null);
 	const [collegeData, setCollegeData] = useState([]);
 
-	const handleSearchByState = (state) => {
-		fetchData(state, setCollegeData, setError);
-	};
+	const handleSearchByState = useCallback(
+		(state) => {
+			fetchData(state, setCollegeData, setError);
+		},
+		[setCollegeData, setError]
+	);
 
 	// get initial data when component first loads
 	useEffect(() => {
@@ -18,11 +21,8 @@ function App() {
 
 	return (
 		<div className="App">
-			<div>
-				<h2>College Scorecard API</h2>
-				<Searchbar searchByState={handleSearchByState} />
-				<Dashboard collegeData={collegeData} error={error} />
-			</div>
+			<Searchbar searchByState={handleSearchByState} />
+			<Dashboard collegeData={collegeData} error={error} />
 		</div>
 	);
 }
