@@ -34,6 +34,26 @@ A search will not begin unless you have entered two letters.
 
 A successfull query will only return the first 100 results.
 
+## Project Notes
+
+#### Layout
+For the attribution links I would have liked to have created a footer and set it in there.
+
+The loading bar could definitely be improved. I would have made it more dynamic by using a setInterval to display (...) fading in and out after the message.
+
+#### Displaying Data
+Admission rate: Some colleges did not have this information so I just set it to 'Not Available'
+
+#### Initiating Query
+I set up a useEffect hook to watch for when the state had a length of two letters.
+I also added a regex check to make sure before the search started the parameters we're valid.
+
+
+#### State Management
+This was a smaller project and there wasn't a lot of state management so I went with something simple
+If I was going to implement any filtering or sorting I definitely would have used a reducer.
+
+
 ## License
 
 ```
