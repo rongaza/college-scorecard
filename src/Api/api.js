@@ -6,6 +6,7 @@ export const fetchData = async (state, successCB, errorCB, setLoading) => {
 
 	try {
 		setLoading(true);
+
 		const data = await axios.get(url, {
 			params: {
 				api_key: process.env.REACT_APP_API_KEY,
@@ -13,6 +14,8 @@ export const fetchData = async (state, successCB, errorCB, setLoading) => {
 			},
 		});
 		successCB(data.data.results);
+
+		// set Loading component to unmount
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);

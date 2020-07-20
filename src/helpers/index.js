@@ -1,6 +1,6 @@
 export const getProgramCounts = (programs) => {
 	const programCount = {};
-	// check to see if they offer degree programs
+	// check to see if college offers degree programs
 	if (programs) {
 		// create key/value pair {'Associate Degree': 15}
 		programs.forEach((program) => {
