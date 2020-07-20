@@ -20,6 +20,7 @@ export const fetchData = async (state, successCB, errorCB, setLoading) => {
 			setLoading(false);
 		}, 500);
 	} catch (error) {
+		setLoading(false);
 		if (error.response) {
 			// Request made and server responded
 			console.log(error.response.data);
