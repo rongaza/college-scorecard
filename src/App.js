@@ -5,24 +5,25 @@ import { fetchData } from './Api/api';
 
 function App() {
 	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [collegeData, setCollegeData] = useState([]);
 
 	const handleSearchByState = useCallback(
 		(state) => {
-			fetchData(state, setCollegeData, setError);
+			fetchData(state, setCollegeData, setError, setLoading);
 		},
-		[setCollegeData, setError]
+		[setCollegeData, setError, setLoading]
 	);
 
 	// get initial data when component first loads
 	useEffect(() => {
-		fetchData('ID', setCollegeData, setError);
+		fetchData('ID', setCollegeData, setError, setLoading);
 	}, []);
 
 	return (
 		<div className="App">
 			<Searchbar searchByState={handleSearchByState} />
-			<Dashboard collegeData={collegeData} error={error} />
+			<Dashboard collegeData={collegeData} error={error} loading={loading} />
 		</div>
 	);
 }
