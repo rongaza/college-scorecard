@@ -14,6 +14,11 @@ Styled Components 5.1.1
 
 To run this project install it locally using npm
 
+You will need a api key from college scorecard to run this project.
+
+Create a react env variable <br>
+REACT_APP_API_KEY='your api key'
+
 ## Starting Project
 
 To start this project
