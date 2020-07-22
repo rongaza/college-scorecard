@@ -8,7 +8,7 @@ import Sandbox from './sandbox';
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-width: 1200px;
+	max-width: 1600px;
 	margin: auto;
 	height: 500px;
 `;

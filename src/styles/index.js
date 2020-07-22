@@ -4,7 +4,7 @@ export const Card = styled.div`
 	margin: 10px 10px;
 	padding: 20px;
 	min-height: 200px;
-	width: 300px;
+	width: 400px;
 	border-radius: 3px;
 	background-color: white;
 	-webkit-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
@@ -24,17 +24,17 @@ export const Col = styled.div`
 `;
 
 export const Title = styled.h4`
-	font-size: 12px;
+	font-size: 14px;
 	margin-top: 0px;
 	margin-bottom: 0;
 	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
 `;
 
 export const Text = styled.p`
-	font-size: 12px;
+	font-size: 14px;
 	margin-top: 2px;
 	margin-bottom: 2px;
-	line-height: 1;
+	line-height: 1.2;
 	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
 	color: ${(props) => props.color};
 `;
