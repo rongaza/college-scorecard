@@ -7,9 +7,9 @@ export const Card = styled.div`
 	width: 400px;
 	border-radius: 3px;
 	background-color: white;
-	-webkit-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
-	box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: -1px 0px 5px 2px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: -1px 0px 5px 2px rgba(0, 0, 0, 0.07);
+	box-shadow: -1px 0px 5px 2px rgba(0, 0, 0, 0.07);
 `;
 
 export const Row = styled.div`
@@ -88,7 +88,7 @@ export const Li = styled.li`
 	font-size: 16px;
 	line-height: 1.6;
 	&:hover {
-		background: lightBlue;
+		background: #f0f8ff;
 		border-radius: 5px;
 	}
 `;
