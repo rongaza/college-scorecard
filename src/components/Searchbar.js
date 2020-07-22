@@ -1,60 +1,111 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Row } from '../styles';
+import { stateAbbrev } from '../helpers';
 import location from '../images/location.png';
+import { SearchBar, OptionsBox, Ul, Li } from '../styles';
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const Form = styled.form`
-	display: flex;
-	justify-content: center;
+	width: 350px;
+	height: 40px;
+	position: relative;
+	margin: 0;
 `;
 
 const Input = styled.input`
-	height: 20px;
-	width: 300px;
+	width: 100%;
+	height: 30px;
+	border-radius: 15px;
 	border: 0px;
 	background-image: url(${location});
-	background-size: 20px;
+	background-size: 30px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
-	border-radius: 25px;
 `;
 
-const Searchbar = ({ searchByState }) => {
-	const [state, setState] = useState('');
+const Sandbox = ({ searchByState }) => {
+	const [showList, setShowList] = useState(false);
+	// const [state, setState] = useState('');
+	const [searchInput, setSearchInput] = useState('');
 
-	const handleSearchState = (e) => {
-		setState(e.target.value);
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		setShowList(false);
+		searchByState(searchInput);
+		setSearchInput('');
+	};
+	const handleSearchInput = (e) => {
+		console.log(e.target.value);
+		// show available state abbreviation options
+
+		if (/^[a-zA-Z]{0,2}$/.test(e.target.value)) {
+			setSearchInput(e.target.value.toUpperCase());
+			setShowList(true);
+		}
 	};
 
+	const handleSelectOption = (option) => {
+		// setState(option);
+		setSearchInput(option);
+		// stop options list from displaying
+		setShowList(false);
+		searchByState(option);
+	};
+
+	const renderOptionsList = () => {
+		const optionsList = stateAbbrev.filter((state) => {
+			if (searchInput.length === 1) {
+				return state[0] === searchInput;
+			} else {
+				return state === searchInput;
+			}
+		});
+		return optionsList.map((option, index) => {
+			return (
+				<Li key={option} tabIndex={index} onClick={() => handleSelectOption(option)}>
+					{option}
+				</Li>
+			);
+		});
+	};
+
+	// controls display for search list
+	useEffect(() => {
+		if (searchInput === '') {
+			setShowList(false);
+		}
+	}, [searchInput]);
+
+	// initiate search without having to hit enter or click option
 	useEffect(() => {
 		const validState = () => {
 			// only allow letters for state code
-			return /^[a-zA-Z]+$/.test(state);
+			return /^[a-zA-Z]+$/.test(searchInput);
 		};
 
-		if (state.length === 2 && validState) {
-			searchByState(state);
+		if (searchInput.length === 2 && validState) {
+			searchByState(searchInput);
+			setShowList(false);
 		}
-	}, [state, searchByState]);
+	}, [searchInput, searchByState]);
 
 	return (
-		<Wrapper>
-			<Form onSubmit={(e) => e.preventDefault()}>
-				<Input
-					type="textarea"
-					name="states"
-					value={state.toUpperCase()}
-					maxLength={2}
-					placeholder="Enter a two letter state code: CA"
-					onChange={handleSearchState}
-				/>
-			</Form>
-		</Wrapper>
+		<Row style={{ justifyContent: 'center' }}>
+			<Wrapper>
+				<SearchBar>
+					<form onSubmit={handleFormSubmit}>
+						<Input type="text" maxLength={2} onChange={(e) => handleSearchInput(e)} value={searchInput} />
+						<span id="error"></span>
+					</form>
+				</SearchBar>
+				{showList ? (
+					<OptionsBox>
+						<Ul>{renderOptionsList()}</Ul>
+					</OptionsBox>
+				) : null}
+			</Wrapper>
+		</Row>
 	);
 };
 
-export default Searchbar;
+export default Sandbox;
