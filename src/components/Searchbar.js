@@ -25,19 +25,19 @@ const Input = styled.input`
 
 const Sandbox = ({ searchByState }) => {
 	const [showList, setShowList] = useState(false);
-	// const [state, setState] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		// stop options list from displaying
 		setShowList(false);
+		//initiate api search
 		searchByState(searchInput);
+		// reset search input
 		setSearchInput('');
 	};
 	const handleSearchInput = (e) => {
-		console.log(e.target.value);
-		// show available state abbreviation options
-
+		// only allow letters to be entered
 		if (/^[a-zA-Z]{0,2}$/.test(e.target.value)) {
 			setSearchInput(e.target.value.toUpperCase());
 			setShowList(true);
@@ -45,7 +45,6 @@ const Sandbox = ({ searchByState }) => {
 	};
 
 	const handleSelectOption = (option) => {
-		// setState(option);
 		setSearchInput(option);
 		// stop options list from displaying
 		setShowList(false);
@@ -83,8 +82,10 @@ const Sandbox = ({ searchByState }) => {
 			return /^[a-zA-Z]+$/.test(searchInput);
 		};
 
+		// initiate search when input length is 2
 		if (searchInput.length === 2 && validState) {
 			searchByState(searchInput);
+			// stop options list from displaying
 			setShowList(false);
 		}
 	}, [searchInput, searchByState]);
