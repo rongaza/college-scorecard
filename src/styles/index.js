@@ -5,10 +5,11 @@ export const Card = styled.div`
 	padding: 20px;
 	min-height: 200px;
 	width: 300px;
+	border-radius: 3px;
 	background-color: white;
-	-webkit-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.41);
-	-moz-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.41);
-	box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.41);
+	-webkit-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const Row = styled.div`
@@ -30,9 +31,10 @@ export const Title = styled.h4`
 `;
 
 export const Text = styled.p`
-	font-size: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
+	font-size: 12px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	line-height: 1.2;
 	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
 	color: ${(props) => props.color};
 `;
@@ -53,5 +55,45 @@ export const PercentBar = styled.div`
 	background-color: ${(props) => (props.color ? props.color : 'lightblue')};
 	margin: auto;
 	margin-left: 0px;
-	border-radius: 25px;
+	border-bottom-left-radius: 25px;
+	border-top-left-radius: 25px;
+`;
+
+export const SearchBar = styled.div`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+`;
+
+export const OptionsBox = styled.div`
+	z-index: 9;
+	width: 380px;
+	height: auto;
+	margin-top: 40px;
+	background: white;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const Ul = styled.ul`
+	list-style-type: none;
+	margin-left: 0;
+	padding: 5px;
+`;
+export const Li = styled.li`
+	font-size: 16px;
+	line-height: 1.6;
+	&:hover {
+		background: lightBlue;
+		border-radius: 5px;
+	}
+`;
+
+export const BGColor = styled.span`
+	background: rgb(113, 181, 204);
+	background: linear-gradient(0deg, rgba(113, 181, 204, 1) 29%, rgba(173, 216, 230, 1) 70%);
 `;

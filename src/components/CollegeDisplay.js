@@ -1,6 +1,6 @@
 import React from 'react';
 import { getProgramCounts, formatNumber } from '../helpers';
-import { Card, Row, Col, Title, Text, PercentageWrapper, PercentBar } from '../styles';
+import { Card, Row, Col, Title, Text, PercentageWrapper, PercentBar, BGColor } from '../styles';
 import UniversityIcon from '../images/university.svg';
 
 const CollegeDisplay = ({ college }) => {
@@ -86,14 +86,9 @@ const CollegeDisplay = ({ college }) => {
 										marginTop: '5px',
 									}}
 								>
-									<span
-										style={{
-											backgroundColor: 'lightBlue',
-											padding: '0 5px',
-										}}
-									>
+									<BGColor>
 										{city}, {state}
-									</span>
+									</BGColor>
 								</Text>
 							</div>
 						</Col>
@@ -102,7 +97,7 @@ const CollegeDisplay = ({ college }) => {
 						<Col>
 							<Text>Student Size:</Text>
 							<Text color="purple" bold style={{ paddingTop: '3px' }}>
-								{studentSize && formatNumber(studentSize)}
+								{studentSize ? formatNumber(studentSize) : 'N/A'}
 							</Text>
 						</Col>
 

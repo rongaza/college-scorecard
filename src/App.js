@@ -3,12 +3,14 @@ import Searchbar from './components/Searchbar';
 import Dashboard from './components/Dashboard';
 import { fetchData } from './Api/api';
 import styled from 'styled-components';
+import Sandbox from './sandbox';
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 1200px;
 	margin: auto;
+	height: 500px;
 `;
 
 function App() {
@@ -37,3 +39,6 @@ function App() {
 }
 
 export default App;
+
+// <Searchbar searchByState={handleSearchByState} />
+// 			<Dashboard collegeData={collegeData} error={error} loading={loading} />

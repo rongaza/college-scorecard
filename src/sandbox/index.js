@@ -1,100 +1,110 @@
-// const [prevState, setPrevState] = useState('');
-
-// trigger search when two letter state entered
-// useEffect(() => {
-// 	console.log('render searchbar', state);
-// 	if (state.length === 2 && prevState !== state) {
-// 		searchByState(state);
-// 		setPrevState(state);
-// 	}
-// }, [state, prevState, searchByState]);
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Row } from '../styles';
+import { stateAbbrev } from '../helpers';
+import location from '../images/location.png';
+import { SearchBar, OptionsBox, Ul, Li } from '../styles';
 
-const Container = styled.div``;
+const Wrapper = styled.div`
+	width: 350px;
+	height: 40px;
+	position: relative;
+	margin: 0;
+`;
 
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
+const Input = styled.input`
 	width: 100%;
+	height: 30px;
+	border-radius: 15px;
+	border: 0px;
+	background-image: url(${location});
+	background-size: 30px;
+	background-repeat: no-repeat;
+	padding-left: 30px;
 `;
-const Col = styled.div`
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-`;
+const Sandbox = ({ searchByState }) => {
+	const [showList, setShowList] = useState(false);
+	// const [state, setState] = useState('');
+	const [searchInput, setSearchInput] = useState('');
 
-const PercentageWrapper = styled.div`
-	height: 10px;
-	max-width: 100px;
-	background-color: ${(props) => (props.color ? props.color : 'lightgray')};
-	align-content: center;
-	border-radius: 25px;
-	margin: 5px;
-`;
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		setShowList(false);
+		searchByState(searchInput);
+		setSearchInput('');
+	};
+	const handleSearchInput = (e) => {
+		console.log(e.target.value);
+		// show available state abbreviation options
 
-const PercentBar = styled.div`
-	height: 100%;
-	width: ${(props) => (props.percent ? `${props.percent}%` : '0%')};
-	background-color: ${(props) => (props.color ? props.color : 'lightblue')};
-	margin: auto;
-	margin-left: 0px;
-	border-radius: 25px;
-`;
+		if (/^[a-zA-Z]{0,2}$/.test(e.target.value)) {
+			setSearchInput(e.target.value.toUpperCase());
+			setShowList(true);
+		}
+	};
 
-const Title = styled.h4`
-	font-size: 12px;
-	margin-top: 0px;
-	margin-bottom: 0;
-	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
-`;
+	const handleSelectOption = (option) => {
+		// setState(option);
+		setSearchInput(option);
+		// stop options list from displaying
+		setShowList(false);
+		searchByState(option);
+	};
 
-const Text = styled.p`
-	font-size: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
-	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
-	color: ${(props) => props.color};
-`;
+	const renderOptionsList = () => {
+		const optionsList = stateAbbrev.filter((state) => {
+			if (searchInput.length === 1) {
+				return state[0] === searchInput;
+			} else {
+				return state === searchInput;
+			}
+		});
+		return optionsList.map((option, index) => {
+			return (
+				<Li key={option} tabIndex={index} onClick={() => handleSelectOption(option)}>
+					{option}
+				</Li>
+			);
+		});
+	};
 
-const Sandbox = () => {
+	// controls display for search list
+	useEffect(() => {
+		if (searchInput === '') {
+			setShowList(false);
+		}
+	}, [searchInput]);
+
+	// initiate search without having to hit enter or click option
+	useEffect(() => {
+		const validState = () => {
+			// only allow letters for state code
+			return /^[a-zA-Z]+$/.test(searchInput);
+		};
+
+		if (searchInput.length === 2 && validState) {
+			searchByState(searchInput);
+			setShowList(false);
+		}
+	}, [searchInput, searchByState]);
+
 	return (
-		<Row style={{ maxWidth: '100px' }}>
-			<Col>
-				<Text>Addmission Rate:</Text>
-
-				<Row>
-					<Col
-						style={{
-							flex: 1,
-							alignItems: 'center',
-							margin: '3px',
-						}}
-					>
-						<Text
-							bold
-							style={{
-								paddingBottom: '3px',
-							}}
-						>
-							33%
-						</Text>
-					</Col>
-					<Col style={{ flex: 3, marginLeft: '0px', paddingLeft: 0 }}>
-						<PercentageWrapper>
-							<PercentBar percent={33} />
-						</PercentageWrapper>
-					</Col>
-				</Row>
-			</Col>
+		<Row style={{ justifyContent: 'center' }}>
+			<Wrapper>
+				<SearchBar>
+					<form onSubmit={handleFormSubmit}>
+						<Input type="text" maxLength={2} onChange={(e) => handleSearchInput(e)} value={searchInput} />
+						<span id="error"></span>
+					</form>
+				</SearchBar>
+				{showList ? (
+					<OptionsBox>
+						<Ul>{renderOptionsList()}</Ul>
+					</OptionsBox>
+				) : null}
+			</Wrapper>
 		</Row>
 	);
 };
 
 export default Sandbox;
-
-<form>
-  <input>Whateves</input>
-  <div id='error'>{ if input is blank than wiret codfe}</div>
-</form>
