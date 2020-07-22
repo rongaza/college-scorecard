@@ -6,18 +6,22 @@ const Wrapper = styled.div`
 	justify-content: center;
 `;
 
+const A = styled.a`
+	margin-right: 4px;
+	margin-left: 4px;
+`;
+
 const AttributionLinks = () => {
 	return (
 		<Wrapper>
 			Icons made by
-			<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">
-				{' '}
+			<A href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">
 				Pixel perfect
-			</a>
+			</A>
 			from
-			<a href="https://www.flaticon.com/" title="Flaticon">
+			<A href="https://www.flaticon.com/" title="Flaticon">
 				www.flaticon.com
-			</a>
+			</A>
 		</Wrapper>
 	);
 };

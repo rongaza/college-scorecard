@@ -34,7 +34,7 @@ export const Text = styled.p`
 	font-size: 12px;
 	margin-top: 2px;
 	margin-bottom: 2px;
-	line-height: 1.2;
+	line-height: 1;
 	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
 	color: ${(props) => props.color};
 `;

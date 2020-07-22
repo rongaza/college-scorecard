@@ -47,19 +47,23 @@ const CollegeDisplay = ({ college }) => {
 		// convert programCounts object into an array to map over
 		const programCounts = Object.entries(getProgramCounts(programs));
 
-		return programCounts.map((program) => {
-			const [name, count] = program;
-			return (
-				<Text key={name}>
-					{name}: <span style={{ fontWeight: 'bold' }}>{count}</span>
-				</Text>
-			);
-		});
+		if (programCounts.length > 0) {
+			return programCounts.map((program) => {
+				const [name, count] = program;
+				return (
+					<Text key={name}>
+						{name}: <span style={{ fontWeight: 'bold' }}>{count}</span>
+					</Text>
+				);
+			});
+		}
+
+		return <Text>Program info not available</Text>;
 	};
 
 	return (
 		<Card>
-			<Row style={{ maxHeight: '100px' }}>
+			<Row style={{ maxHeight: '150px' }}>
 				<Col style={{ flex: 1 }}>
 					<div
 						style={{
